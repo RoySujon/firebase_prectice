@@ -4,7 +4,10 @@ A new Flutter project.
 
 ## Getting Started
 
-![Uploading Simulator Screen Recording - iPhone 13 mini - 2023-10-15 at 03.16.23.gif…]()
+
+![Simulator Screen Recording - iPhone 13 mini - 2023-10-15 at 03 13 16](https://github.com/RoySujon/firebase_prectice/assets/48433293/a39b9c25-32f8-4afa-8c09-8963d3b7c9fc)
+
+![Simulator Screen Shot - iPhone 13 mini - 2023-10-07 at 19 31 18](https://github.com/RoySujon/firebase_prectice/assets/48433293/5bf1d3fb-43f3-4aa3-a47a-2ca771255a9d)
 
 This project is a starting point for a Flutter application.
 
