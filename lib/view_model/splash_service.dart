@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_demo/view/auth/login_screen.dart';
+import 'package:firebase_demo/view/auth/sign_up_screen.dart';
 import 'package:firebase_demo/view/firestore/firestore_post_screen.dart';
 
 import 'package:firebase_demo/view/firestore/upload_image.dart';
@@ -17,7 +18,7 @@ class SplashServices {
           .then((value) => Get.to(const FirestorePostScreen()));
     } else {
       Future.delayed(Duration(seconds: 2))
-          .then((value) => Get.to(const LoginScreen()));
+          .then((value) => Get.to(const SignUpScreen()));
     }
   }
 }

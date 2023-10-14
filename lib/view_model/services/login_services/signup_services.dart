@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_demo/Utils/utils.dart';
+import 'package:firebase_demo/view/firestore/firestore_post_screen.dart';
 import 'package:firebase_demo/view/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class SignUpServices extends ChangeNotifier {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => FirestorePostScreen(),
           ));
     }).onError((error, stackTrace) {
       isNotloading();
