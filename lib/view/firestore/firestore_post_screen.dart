@@ -5,10 +5,11 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_demo/Utils/utils.dart';
 import 'package:firebase_demo/data/utils/utils.dart';
 import 'package:firebase_demo/view/firestore/Firestore_add_post.dart';
+import 'package:firebase_demo/view/firestore/details_pagae.dart';
 import 'package:firebase_demo/view/home_screen.dart';
 import 'package:firebase_demo/view/post/add_post.dart';
 import 'package:firebase_demo/view/post/update_post.dart';
-import 'package:firebase_demo/view/post/upload_image.dart';
+import 'package:firebase_demo/view/firestore/upload_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_demo/view/auth/login_screen.dart';
@@ -25,7 +26,7 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
   final _serchController = TextEditingController();
   final firestore = FirebaseFirestore.instance.collection('user');
   final firebaseStorage = FirebaseStorage.instance;
-
+  final _nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,14 +87,19 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(DetailsScreen(
+                            url: snapshot.data!.docs[index]['url'].toString(),
+                            name:
+                                snapshot.data!.docs[index]['name'].toString()));
+                      },
                       trailing: PopupMenuButton(
                         itemBuilder: (context) => [
                           PopupMenuItem(
                               child: ListTile(
                             onTap: () {
                               final _updateController = TextEditingController(
-                                  text: snapshot.data!.docs[index]['url']
+                                  text: snapshot.data!.docs[index]['name']
                                       .toString());
                               Get.back();
                               showDialog(
@@ -117,10 +123,11 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
                                                               .docs[index]['id']
                                                               .toString())
                                                           .update({
-                                                        'url': _updateController
-                                                            .text
-                                                            .trim()
-                                                            .toString()
+                                                        'name':
+                                                            _updateController
+                                                                .text
+                                                                .trim()
+                                                                .toString()
                                                       }).then((value) {
                                                         Utils.toastMessage(
                                                             'Updated');
@@ -190,14 +197,19 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(DetailsScreen(
+                            url: snapshot.data!.docs[index]['url'].toString(),
+                            name:
+                                snapshot.data!.docs[index]['name'].toString()));
+                      },
                       trailing: PopupMenuButton(
                         itemBuilder: (context) => [
                           PopupMenuItem(
                               child: ListTile(
                             onTap: () {
                               final _updateController = TextEditingController(
-                                  text: snapshot.data!.docs[index]['url']
+                                  text: snapshot.data!.docs[index]['name']
                                       .toString());
                               Get.back();
                               showDialog(
@@ -221,10 +233,11 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
                                                               .docs[index]['id']
                                                               .toString())
                                                           .update({
-                                                        'url': _updateController
-                                                            .text
-                                                            .trim()
-                                                            .toString()
+                                                        'name':
+                                                            _updateController
+                                                                .text
+                                                                .trim()
+                                                                .toString()
                                                       }).then((value) {
                                                         Utils.toastMessage(
                                                             'Updated');
@@ -293,7 +306,8 @@ class _FirestorePostScreenState extends State<FirestorePostScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => UploadImageScreen(),
+            builder: (context) =>
+                UploadImageScreen(nameController: _nameController),
           );
         },
         child: Icon(Icons.add),

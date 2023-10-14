@@ -5,11 +5,13 @@ import 'package:firebase_demo/data/utils/utils.dart';
 import 'package:firebase_demo/view_model/services/image_picker_services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class UploadImageScreen extends StatefulWidget {
-  const UploadImageScreen({super.key});
+  const UploadImageScreen({super.key, required this.nameController});
+  final TextEditingController nameController;
   @override
   State<UploadImageScreen> createState() => _UploadImageScreenState();
 }
@@ -24,7 +26,6 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
     final _controller =
         Provider.of<PickImagerServiceProvider>(context, listen: false);
 
-    final _nameController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -36,13 +37,14 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
         child: Column(
           children: [
             CustomeTextField(
-              controller: _nameController,
+              controller: widget.nameController,
               hintText: 'Enter your name',
               labelText: 'Name',
               prefixIcon: Icon(Icons.person),
               errorText: 'errorText',
               borderColor: Colors.blueGrey,
             ),
+            SizedBox(height: 34),
             Center(
               child: SizedBox(
                 height: 200,
@@ -82,7 +84,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             RoundButton(
               text: 'Upload Image',
               onTap: () async {
-                if (_nameController.text.trim().isNotEmpty) {
+                if (widget.nameController.text.trim().isNotEmpty) {
                   var id = DateTime.now().millisecondsSinceEpoch.toString();
                   print(id);
                   Reference _referance =
@@ -99,7 +101,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
                         .set({
                           'url': newUrl.toString(),
                           'id': id.toString(),
-                          'name': _nameController.text.trim().toString()
+                          'name': widget.nameController.text.trim().toString()
                         })
                         .then((value) => Utils.toastMessage('Sucess'))
                         .onError((error, stackTrace) =>

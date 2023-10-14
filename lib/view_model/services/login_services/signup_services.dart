@@ -8,8 +8,7 @@ class SignUpServices extends ChangeNotifier {
   TextEditingController get emailController => _emailController;
   TextEditingController _passController = TextEditingController();
   TextEditingController get passController => _passController;
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController get nameController => _passController;
+
   bool _loading = true;
   bool get loading => _loading;
   final _auth = FirebaseAuth.instance;

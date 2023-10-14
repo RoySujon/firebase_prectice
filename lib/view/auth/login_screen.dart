@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_demo/view/auth/login_with_phone.dart';
+import 'package:firebase_demo/view/firestore/firestore_post_screen.dart';
 import 'package:firebase_demo/view_model/services/login_services/login_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
@@ -51,74 +52,77 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                const CustomText(text: 'Login'),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      CustomeTextField(
-                        hintText: 'Ente your email here...',
-                        labelText: 'Email',
-                        controller: controller.emailController,
-                        errorText: 'Error Email',
-                        prefixIcon: Icon(Icons.email),
-                      ),
-                      CustomeTextField(
-                        hintText: 'Ente your password here...',
-                        labelText: 'Password',
-                        obscureText: true,
-                        controller: controller.passController,
-                        errorText: 'Error Password',
-                        prefixIcon: Icon(Icons.lock),
-                      ),
-                    ],
+        child: SingleChildScrollView(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  const CustomText(text: 'Login'),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        CustomeTextField(
+                          hintText: 'Ente your email here...',
+                          labelText: 'Email',
+                          controller: controller.emailController,
+                          errorText: 'Error Email',
+                          prefixIcon: Icon(Icons.email),
+                        ),
+                        CustomeTextField(
+                          hintText: 'Ente your password here...',
+                          labelText: 'Password',
+                          obscureText: true,
+                          controller: controller.passController,
+                          errorText: 'Error Password',
+                          prefixIcon: Icon(Icons.lock),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                RowTextWithButton(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgetPassScreem(),
-                        ));
-                  },
-                  text: 'Forgot your password?',
-                ),
-                Consumer<LoginService>(
-                  builder: (context, value, child) => RoundButton(
-                    text: 'LOGIN',
-                    loading: value.loading,
+                  RowTextWithButton(
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        value.loginUser(context);
-                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgetPassScreem(),
+                          ));
                     },
+                    text: 'Forgot your password?',
                   ),
-                ),
-                SizedBox(
-                  height: 34,
-                ),
-                RoundButton(
-                  text: 'Login with Phone',
-                  onTap: () {
-                    Get.to(const LoginWithPhoneScreen());
-                  },
-                )
-              ],
-            ),
-            LoginButtonWithSocialMedia(
-              googleButton: () {},
-              facebookButton: () {
-                signInWithGoogle();
-              },
-            )
-          ],
+                  Consumer<LoginService>(
+                    builder: (context, value, child) => RoundButton(
+                      text: 'LOGIN',
+                      loading: value.loading,
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          value.loginUser(context);
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 34,
+                  ),
+                  RoundButton(
+                    text: 'Login with Phone',
+                    onTap: () {
+                      Get.to(const LoginWithPhoneScreen());
+                    },
+                  )
+                ],
+              ),
+              LoginButtonWithSocialMedia(
+                googleButton: () {},
+                facebookButton: () {
+                  signInWithGoogle()
+                      .then((value) => Get.to(FirestorePostScreen()));
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_demo/data/utils/utils.dart';
 import 'package:firebase_demo/view/auth/veryfy_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 
 import '../../Utils/utils.dart';
+import '../firestore/firestore_post_screen.dart';
 
 class LoginWithPhoneScreen extends StatefulWidget {
   const LoginWithPhoneScreen({super.key});
@@ -50,10 +52,57 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
                     verificationFailed: (error) =>
                         Utils.toastMessage(error.toString()),
                     codeSent: (verificationId, forceResendingToken) {
-                      Get.to(VerifyScreem(
-                        verificationId: verificationId,
-                      ));
+                      final _sixDigitCode = TextEditingController();
+                      showDialog(
+                          builder: (context) => AlertDialog(
+                                  semanticLabel: '6 Digit Code',
+                                  actions: [
+                                    CustomeTextField(
+                                      controller: _sixDigitCode,
+                                      errorText: '',
+                                      labelText: '6 digit',
+                                      borderColor: Colors.blueGrey,
+                                      hintText: '223...',
+                                    ),
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text('Cancel')),
+                                        TextButton(
+                                            onPressed: () async {
+                                              final credential =
+                                                  PhoneAuthProvider.credential(
+                                                      verificationId:
+                                                          verificationId,
+                                                      smsCode:
+                                                          _sixDigitCode.text);
+
+                                              try {
+                                                await _auth
+                                                    .signInWithCredential(
+                                                        credential);
+                                                Get.to(FirestorePostScreen());
+                                              } catch (e) {
+                                                if (kDebugMode) {
+                                                  print(e);
+                                                }
+                                              }
+                                            },
+                                            child: Text('Verify')),
+                                      ],
+                                    ),
+
+                                    // applicationName: 'UPDATE',
+                                  ]),
+                          context: context);
                     },
+                    // Get.to(VerifyScreem(
+                    //   verificationId: verificationId,
+                    // ));
+
                     codeAutoRetrievalTimeout: (verificationId) {
                       verificationId.toString();
                     },
