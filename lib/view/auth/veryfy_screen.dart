@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_demo/data/utils/utils.dart';
+import 'package:firebase_demo/view/firestore/firestore_post_screen.dart';
 import 'package:firebase_demo/view/home_screen.dart';
 import 'package:flutter/foundation.dart';
 
@@ -46,7 +47,7 @@ class _VerifyScreemState extends State<VerifyScreem> {
 
                 try {
                   await _auth.signInWithCredential(credential);
-                  Get.to(HomeScreen());
+                  Get.to(FirestorePostScreen());
                 } catch (e) {
                   if (kDebugMode) {
                     print(e);
