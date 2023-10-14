@@ -19,3 +19,5 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+![Simulator Screen Recording - iPhone 13 mini - 2023-10-15 at 03 29 18](https://github.com/RoySujon/firebase_prectice/assets/48433293/f2f3e500-7b91-4161-b37d-3ea0887eb8e9)
