@@ -3,6 +3,7 @@
 A new Flutter project.
 
 ## Getting Started
+![Uploading Simulator Screen Recording - iPhone 13 mini - 2023-10-15 at 03.13.16.gif…]()
 
 This project is a starting point for a Flutter application.
 
