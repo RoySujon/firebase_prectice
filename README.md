@@ -4,6 +4,7 @@
 
 
 
-![MOCK Up iphone 14 pro max](https://github.com/RoySujon/firebase_prectice/assets/48433293/c7dabbab-fcfc-40f1-bb18-e6a7dd5c9228)
 
+
+![MOCK Up iphone 14 pro max](https://github.com/RoySujon/firebase_prectice/assets/48433293/7dc50304-1c13-4bf7-89c8-e1b1d0499e74)
 
